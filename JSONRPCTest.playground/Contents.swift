@@ -14,7 +14,7 @@ import UIKit
  
 ```{"jsonrpc":"2.0","method":"eth_getTransactionCount","params":["0x407d73d8a49eeb85d32cf465507dd71d507100c1","latest"],"id":1}```
  
- A more complex one, with dictionary as params looks like this:
+ A more complex one, with dictionary as params looks like this. Note that the dictionary is wrapped inside an array:
  
  ```{"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{"from":"0xb60e8dd61c5d32be8058bb8eb970870f07233155","to":"0xd46e8dd67c5d32be8058bb8eb970870f07244567","gas":"0x76c0","gasPrice":"0x9184e72a000","value":"0x9184e72a","data":"0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"}],"id":1}```
  
@@ -81,18 +81,37 @@ struct ClientversionRequest: RPCRequest {
     static let rpcMethod = "web3_clientVersion"
 }
 
-// To encode a request
-let request = ClientversionRequest()
+// To encode an RPC request
+let rpcRequest = ClientversionRequest()
 let rpcEncoder = JSONRPCEncoder()
-let rpcData = try! rpcEncoder.encode(request)
-let rpcString = String(data: jsonData, encoding: .utf8)
-print(rpcString) // Should be {"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}
+let rpcData = try! rpcEncoder.encode(rpcRequest)
+let rpcString = String(data: rpcData, encoding: .utf8)!
+print(rpcString) // "{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}"
 
-// To decode a response
-let rpcResponse = "{\"jsonrpc\":\"2.0\",\"id\":67,\"result\":\"Geth/v1.7.2-stable-1db4ecdc/darwin-amd64/go1.9.1\"}".utf8
+// To decode an RPC response
+let rpcResponse = "{\"jsonrpc\":\"2.0\",\"id\":67,\"result\":\"Geth/v1.7.2-stable-1db4ecdc/darwin-amd64/go1.9.1\"}".data(using: .utf8)!
 let rpcDecoder = JSONRPCDecoder()
-let version = rpcEncoder.decode(Clientversion.self, from: rpcResponse)
-print (version)
+let rpcVersion = try! rpcDecoder.decode(Clientversion.self, from: rpcResponse)
+print (rpcVersion) // "Geth/v1.7.2-stable-1db4ecdc/darwin-amd64/go1.9.1\"
+
+// Encoding to JSON should still be possible
+let jsonRequest = ClientversionRequest()
+let encoder = JSONEncoder()
+let jsonData = try! encoder.encode(jsonRequest)
+let jsonString = String(data: jsonData, encoding: .utf8)!
+print(jsonString) // "{"method":"web3_clientVersion","id":67}"
+
+// Decoding to JSON should still be possible
+let jsonResponse = "{\"id\":67,\"clientVersion\":\"Geth/v1.7.2-stable-1db4ecdc/darwin-amd64/go1.9.1\"}".data(using: .utf8)!
+let jsonDecoder = JSONDecoder()
+let jsonVersion = try! jsonDecoder.decode(Clientversion.self, from: jsonResponse)
+print (jsonVersion) // "Geth/v1.7.2-stable-1db4ecdc/darwin-amd64/go1.9.1\"
+
+// TODO: Make sure position of params is correct in byPosition, e.g.:
+// '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}'
+
+
+
 
 /*
 open class JSONRPCEncoder: JSONEncoder {
