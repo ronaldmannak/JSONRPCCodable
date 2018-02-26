@@ -82,7 +82,7 @@ struct ClientversionRequest: RPCRequest {
 }
 
 // To encode a request
-let request = Clientversion()
+let request = ClientversionRequest()
 let rpcEncoder = JSONRPCEncoder()
 let rpcData = try! rpcEncoder.encode(request)
 let rpcString = String(data: jsonData, encoding: .utf8)
