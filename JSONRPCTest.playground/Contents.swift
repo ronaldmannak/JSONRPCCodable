@@ -7,6 +7,20 @@ import UIKit
 
  Goal: Create an easy to use JSONRPC framework, while keeping it possible to encode and decode the same data in JSON API.
  
+ ##Possible Solutions for encoding problems:
+ 
+ - in Ethereum, params can in requests are embedded in an array ```[Codable?]```, but that doesn't seem to be a RPC standard. Add an option in RPCEncoder to auto generate an array
+ - in Ethereum, empty params are still passed as an empty array (```params: []```), in the RPC specs, it's valid to don't have a params. Add an option in RPCEncoder to add empty array or remove the params key if no params are passed
+ - Some Ints and Strings need to be converted into hex, but not all. Expand Encoder protocol, or create new RPCEncoder protocol and add ```var hexCodingPath: [CodingKey?] { get }```
+ - Where to add hex translation? Encoder?
+ - byParameter is a standard JSON dictionary, but byPosition is not. Order must be maintained, but how do we define order? Introspection? or ```var position: [CodingKey?] { get}```
+ - Do we need to create a custom byPositionContainer?
+ 
+ ##Possible Solutions for decoding problems:
+ 
+ - Most results are single "unkeyed" values in results key.
+ - How to tell when a value needs to be converted from hex to Int or String? Int can be done automatically, but string can't. Sometimes you want to keep the hex code (e.g. address), but sometimes the hex contains info (which ones? ExtraData key in eth_getBlockByHash and eth_getFilterChanges. Unkeyed: db_getHex). Can we add an option in RPCDecoder?
+
  JSONRPC specs: (http://www.jsonrpc.org/specification)
  
  * RPC Request objects:
@@ -34,6 +48,25 @@ import UIKit
 
  ```{"jsonrpc":"2.0","id":67,"error":{"code":-32601,"message":"The method web3_clientVersion2 does not exist/is not available"}}```
 
+ ## Encoding for Ethereum
+ When encoding QUANTITIES (integers, numbers): encode as hex, prefix with "0x", the most compact representation (slight exception: zero should be represented as "0x0"). Examples:
+ 
+ - 0x41 (65 in decimal)
+ - 0x400 (1024 in decimal)
+ - WRONG: 0x (should always have at least one digit - zero is "0x0")
+ - WRONG: 0x0400 (no leading zeroes allowed)
+ -  WRONG: ff (must be prefixed 0x)
+ 
+ When encoding UNFORMATTED DATA (byte arrays, account addresses, hashes, bytecode arrays): encode as hex, prefix with "0x", two hex digits per byte. Examples:
+ 
+ - 0x41 (size 1, "A")
+ - 0x004200 (size 3, "\0B\0")
+ - 0x (size 0, "")
+ - WRONG: 0xf0f0f (must be even number of digits)
+ - WRONG: 004200 (must be prefixed 0x)
+ 
+
+ 
  Test 1: Can we create a JSONRPCEncoder and JSONRPCDecoder that works with Codable?
  (https://github.com/apple/swift/blob/master/stdlib/public/SDK/Foundation/JSONEncoder.swift)
  
@@ -53,6 +86,82 @@ import UIKit
  
  ```fileprivate struct _JSONKeyedEncodingContainer<K : CodingKey> : KeyedEncodingContainerProtocol```
  */
+
+extension Int {
+    var hexValue: String {
+        return ""
+    }
+}
+
+extension String {
+    var hexValue: String {
+        return ""
+    }
+}
+
+
+public typealias RPCCodable = RPCDecodable & RPCEncodable
+
+public protocol RPCDecodable: Decodable {
+    init(from decoder: RPCDecoder) throws
+}
+
+public protocol RPCEncodable: Encodable {
+    func encode(to encoder: RPCEncoder) throws
+}
+
+public protocol HexCodingKey: CodingKey {
+    
+}
+
+//// OR
+//extension CodingKey {
+//    public var hexValue: String? { get }
+//}
+
+// OR
+
+public protocol RPCEncoder: Encoder {
+    
+}
+
+public protocol PRCDecoder: Decoder {
+    /// The path of coding keys taken to get to this point in decoding.
+    //public var codingPath: [CodingKey] { get }
+    public var hexCodingPath: [CodingKey] { get }
+    
+    /// Any contextual information set by the user for decoding.
+    //public var userInfo: [CodingUserInfoKey : Any] { get }
+}
+
+/*
+ can we create a
+ HexCodingKey
+/// A type that can be used as a key for encoding and decoding.
+public protocol CodingKey {
+    
+    /// The string to use in a named collection (e.g. a string-keyed dictionary).
+    public var stringValue: String { get }
+    
+    /// Creates a new instance from the given string.
+    ///
+    /// If the string passed as `stringValue` does not correspond to any instance of this type, the result is `nil`.
+    ///
+    /// - parameter stringValue: The string value of the desired key.
+    public init?(stringValue: String)
+    
+    /// The value to use in an integer-indexed collection (e.g. an int-keyed dictionary).
+    public var intValue: Int? { get }
+    
+    /// Creates a new instance from the specified integer.
+    ///
+    /// If the value passed as `intValue` does not correspond to any instance of this type, the result is `nil`.
+    ///
+    /// - parameter intValue: The integer value of the desired key.
+    public init?(intValue: Int)
+}
+
+*/
 
 enum RPCStructure { case byName, byPosition }
 
