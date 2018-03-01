@@ -7,6 +7,8 @@ import UIKit
 
  Goal: Create an easy to use JSONRPC framework, while keeping it possible to encode and decode the same data in JSON API.
  
+ JSONRPC specs: (http://www.jsonrpc.org/specification)
+ 
  ##Possible Solutions for encoding problems:
  
  - in Ethereum, params can in requests are embedded in an array ```[Codable?]```, but that doesn't seem to be a RPC standard. Add an option in RPCEncoder to auto generate an array
@@ -14,14 +16,24 @@ import UIKit
  - Some Ints and Strings need to be converted into hex, but not all. Expand Encoder protocol, or create new RPCEncoder protocol and add ```var hexCodingPath: [CodingKey?] { get }```
  - Where to add hex translation? Encoder?
  - byParameter is a standard JSON dictionary, but byPosition is not. Order must be maintained, but how do we define order? Introspection? or ```var position: [CodingKey?] { get}```
- - Do we need to create a custom byPositionContainer?
+ - Do we need to create a custom byPositionContainer? or can we fit everything in KeyedContainer, UnkeyedContainer, and SingleValueContainer.
+ 
+ OR
+ 
+ - manually add it to func ```encode(to encoder: RPCEncoder) throws```
+ - Where to wrap the data in an RPC structure?
+ - can we do something with subclassing, encoder and decoder can use "super"
  
  ##Possible Solutions for decoding problems:
  
  - Most results are single "unkeyed" values in results key.
  - How to tell when a value needs to be converted from hex to Int or String? Int can be done automatically, but string can't. Sometimes you want to keep the hex code (e.g. address), but sometimes the hex contains info (which ones? ExtraData key in eth_getBlockByHash and eth_getFilterChanges. Unkeyed: db_getHex). Can we add an option in RPCDecoder?
 
- JSONRPC specs: (http://www.jsonrpc.org/specification)
+ Check
+ https://stackoverflow.com/questions/44549310/how-to-decode-a-nested-json-struct-with-swift-decodable-protocol https://medium.com/swiftly-swift/swift-4-decodable-beyond-the-basics-990cc48b7375
+ https://stablekernel.com/understanding-extending-swift-4-codable/
+ https://github.com/gwynne/XMLRPCSerialization XMLRPC
+ 
  
  * RPC Request objects:
  Request objects are similarly confusing. The method name is stored in "method". Parameters are either passed by-position or by-name. By-position MUST be an array, by-name must be a dictionary. A simple method is:
@@ -122,16 +134,30 @@ public protocol HexCodingKey: CodingKey {
 // OR
 
 public protocol RPCEncoder: Encoder {
+    var codingPath: [CodingKey?] { get }
+    var userInfo: [CodingUserInfoKey : Any] { get }
     
+    func container<Key>(keyedBy type: Key.Type)
+        -> KeyedEncodingContainer<Key> where Key : CodingKey
+    func unkeyedContainer() -> UnkeyedEncodingContainer // if order is guaranteed
+    func singleValueContainer() -> SingleValueEncodingContainer
 }
 
 public protocol PRCDecoder: Decoder {
     /// The path of coding keys taken to get to this point in decoding.
     //public var codingPath: [CodingKey] { get }
-    public var hexCodingPath: [CodingKey] { get }
+    var hexCodingPath: [CodingKey] { get }
     
     /// Any contextual information set by the user for decoding.
     //public var userInfo: [CodingUserInfoKey : Any] { get }
+    
+    var codingPath: [CodingKey?] { get }
+    var userInfo: [CodingUserInfoKey : Any] { get }
+    
+    func container<Key>(keyedBy type: Key.Type) throws
+        -> KeyedDecodingContainer<Key> where Key : CodingKey
+    func unkeyedContainer() throws -> UnkeyedDecodingContainer
+    func singleValueContainer() throws -> SingleValueDecodingContainer
 }
 
 /*
