@@ -9,7 +9,7 @@
 import Foundation
 
 import Foundation
-
+/*
 extension Array: JSONRPCCodable {
     public func binaryEncode(to encoder: JSONRPCEncoder) throws {
         guard Element.self is Encodable.Type else {
@@ -51,3 +51,4 @@ extension String: JSONRPCCodable {
         }
     }
 }
+*/
