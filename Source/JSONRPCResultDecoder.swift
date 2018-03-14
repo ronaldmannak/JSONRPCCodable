@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/*
 /// A protocol for types which can be decoded from JSONRPC.
 public protocol JSONRPCResultDecodable: Decodable {
     init(fromJSONRPC decoder: JSONRPCResultDecoder) throws
@@ -249,3 +249,4 @@ private extension FixedWidthInteger {
         return self.init(bigEndian: v)
     }
 }
+*/

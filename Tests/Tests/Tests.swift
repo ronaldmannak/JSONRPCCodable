@@ -9,7 +9,7 @@
 import XCTest
 import JSONRPCCodable
 
-class Tests: XCTestCase {
+class RequestCodableTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -20,6 +20,22 @@ class Tests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    func testEmptyParams() {
+        struct Ethversion: JSONRPCCodable {
+            func method() -> String {
+                return "eth_version"
+            }
+        }
+        do {
+            let ethVersion = Ethversion()
+            let result = try JSONRPCRequestEncoder.encode(ethVersion)
+            print(result)
+        } catch {
+            XCTFail("Unexpected Error: \(error)")
+        }
+    }
+    
     
     func testExample() {
         // This is an example of a functional test case.
@@ -35,29 +51,34 @@ class Tests: XCTestCase {
     }
     
 }
-
+/*
 // Requests
-struct ClientVesionRequest: JSONRPCCodable {
-    let method = "web3_clientVersion"
+// This is an issue, if there's no property, encode is never called.
+struct ClientVesionRequest: JSONRPCRequestCodable {
+    let placeholder : String
+//    let ph2: String
+    func method() -> String { return "web3_clientVersion" }
     //{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}
 }
 
-struct Sha3: JSONRPCCodable {
+struct Sha3: JSONRPCRequestCodable {
+    
     //{"jsonrpc":"2.0","method":"web3_sha3","params":["0x68656c6c6f20776f726c64"],"id":64}
 }
 
-struct BlockTransactionCount {
+struct BlockTransactionCount: JSONRPCRequestCodable {
     // Make sure string isn't converted to hex
     // {"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByNumber","params":["earliest"],"id":1}
 }
 
-struct Code {
+struct Code: JSONRPCRequestCodable{
     // {"jsonrpc":"2.0","method":"eth_getCode","params":["0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b", "genesis"],"id":1}
 }
 
-struct SendTransaction {
+struct SendTransaction: JSONRPCRequestCodable {
     /*
      Make sure it gets encoded as a dictionary / byName
     {"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{"from":"0xb60e8dd61c5d32be8058bb8eb970870f07233155","to":"0xd46e8dd67c5d32be8058bb8eb970870f07244567","gas":"0x76c0","gasPrice":"0x9184e72a000","value":"0x9184e72a","data":"0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"}],"id":1}
  */
 }
+*/

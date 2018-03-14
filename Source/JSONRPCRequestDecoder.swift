@@ -6,8 +6,12 @@
 //  Copyright © 2018 A Puzzle A Day. All rights reserved.
 //
 
-import Foundation
 
+// Can we use AddtionalInfoKeys to fetch the params?
+// https://developer.apple.com/documentation/foundation/archives_and_serialization/encoding_and_decoding_custom_types
+
+import Foundation
+/*
 /// A protocol for types which can be decoded from JSONRPC.
 public protocol JSONRPCRequestDecodable: Decodable {
     init(fromJSONRPC decoder: JSONRPCRequestDecoder) throws
@@ -249,3 +253,4 @@ private extension FixedWidthInteger {
         return self.init(bigEndian: v)
     }
 }
+*/

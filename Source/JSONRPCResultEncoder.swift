@@ -8,6 +8,7 @@
 
 import CoreFoundation
 
+/*
 
 /// A protocol for types which can be encoded to JSONRPC.
 public protocol JSONRPCResultEncodable: Encodable {
@@ -184,3 +185,4 @@ private extension FixedWidthInteger {
         encoder.appendBytes(of: self.bigEndian)
     }
 }
+*/
