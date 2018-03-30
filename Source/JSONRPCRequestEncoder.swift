@@ -11,8 +11,8 @@ import Foundation
 /**
  Convenience JSONRPC Encoder
  */
-public class JSONRPCRequestEncoder {
-    public static func encode<P: JSONRPCCodable>(_ value: P) throws -> String {
+public final class JSONRPCRequestEncoder {
+    public static func encode<P: JSONRPCCodable>(_ value: P) throws -> Data {
         let encoder = JSONRPCRequestEncoder()
         return try encoder.encode(value)
     }
@@ -21,13 +21,12 @@ public class JSONRPCRequestEncoder {
 public extension JSONRPCRequestEncoder {
     
     /**
-     Returns string for debugging purposes
+     
      */
-    public func encode<P: JSONRPCCodable>(_ encodable: P) throws -> String { // TODO: make encodable return Data
-        let request = JSONRPCRequest<P>(method: encodable.method(), params: encodable, id: encodable.id())
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        let data = try encoder.encode(request)
-        return String(data: data, encoding: .utf8)!
+    public func encode<P: JSONRPCCodable>(_ encodable: P) throws -> Data {
+        
+        // Wrap in JSONRPCRequest
+        let request = JSONRPCRequest<P>(params: encodable)
+        return try JSONEncoder().encode(request)
     }
 }

@@ -23,14 +23,19 @@ class RequestCodableTests: XCTestCase {
     
     func testEmptyParams() {
         struct Ethversion: JSONRPCCodable {
-            func method() -> String {
+            static func method() -> String {
                 return "eth_version"
             }
+            static func paramEncoding() -> JSONRPCParamStructure {
+                return .byName
+            }
         }
+        
         do {
             let ethVersion = Ethversion()
-            let result = try JSONRPCRequestEncoder.encode(ethVersion)
-            print(result)
+            try assertRoundtrip(ethVersion)
+//            let result = try JSONRPCRequestEncoder.encode(ethVersion)
+//            print(result)
         } catch {
             XCTFail("Unexpected Error: \(error)")
         }
@@ -82,3 +87,24 @@ struct SendTransaction: JSONRPCRequestCodable {
  */
 }
 */
+
+private func assertEqual<T>(_ lhs: T, _ rhs: T) {
+    XCTAssertEqual(String(describing: lhs), String(describing: rhs))
+}
+
+private func assertRoundtrip<T: JSONRPCCodable>(_ original: T) throws {
+    // Encode
+    let request = JSONRPCRequest<T>(params: original)
+    let data = try JSONRPCRequestEncoder.encode(original)
+    
+    // Decode
+    let decoder = JSONDecoder()
+    let decodedRequest = try decoder.decode(JSONRPCRequest<T>.self, from: data)
+
+    print(request)
+    print(decodedRequest)
+        
+//        let roundtripped = try JSONRPCRequestDecoder.decode(T.self, data: data)
+//        AssertEqual(original, roundtripped)
+
+}

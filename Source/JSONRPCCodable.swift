@@ -8,41 +8,22 @@
 
 import Foundation
 
-/// Convenience shortcut
-public typealias JSONRPCCodable = JSONRPCDecodable & JSONRPCEncodable
-
 /**
  */
-public protocol JSONRPCDecodable: Decodable {
-    // TODO
-}
-
-/**
- */
-public protocol JSONRPCEncodable: Encodable {
-    func method() -> String
-    func paramEncoding() -> JSONRPCParamStructure
-    func id() -> Int64
+public protocol JSONRPCCodable: Codable { //JSONRPCEncodable: Encodable {
+    static func method() -> String
+    static func paramEncoding() -> JSONRPCParamStructure
     //    func empty/skip params param if empty
     //    func shouldWrapParamsInArray -> Bool
 }
 
-// Default implementation for JSONRPCEncodable
-public extension JSONRPCEncodable {
-    
-    /**
-     Creates threadsafe sequential numbers.
-     */
-    func id() -> Int64 {
-        // TODO: add threadsafe function to generate sequential numbers.
-        // OR should we create the id when encoding? We probably want to do that at the latest possible moment
-        return 1
-    }
+// Default implementation for JSONRPCCodable
+public extension JSONRPCCodable {
     
     /**
      Default parameter encoding is .byPosition
      */
-    func paramEncoding() -> JSONRPCParamStructure {
+    static func paramEncoding() -> JSONRPCParamStructure {
         return .byPosition
     }
 }

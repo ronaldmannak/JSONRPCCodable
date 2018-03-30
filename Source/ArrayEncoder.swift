@@ -11,12 +11,12 @@ import Foundation
 /**
  */
 public class ArrayEncoder {
-    var array = [String]()
+    var array = [String]()  //  Current limitation: encode can only encode to [String], not [Encodable], so even ints are wrapped in strings
 }
 
 extension ArrayEncoder {
     /**
-     Current limitation: encode can only encode to [String], not [Encodable], so even ints are wrapped in strings
+    
      */
     public static func encode<P: Encodable>(_ value: P) throws -> [String] {
         let encoder = ArrayEncoder()
