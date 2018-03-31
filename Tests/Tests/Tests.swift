@@ -21,6 +21,7 @@ class RequestCodableTests: XCTestCase {
         super.tearDown()
     }
     
+    /*
     func testEmptyParams() {
         struct Ethversion: JSONRPCCodable {
             static func method() -> String {
@@ -39,13 +40,25 @@ class RequestCodableTests: XCTestCase {
         } catch {
             XCTFail("Unexpected Error: \(error)")
         }
-    }
+    } */
     
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-//        XCTFail()
+    func testParameterByName() {
+        struct ParamByName: JSONRPCCodable {
+            
+            let param1: String
+            let param2: Int
+            
+            static func method() -> String { return "ParamByName" }
+            static func paramEncoding() -> JSONRPCParamStructure { return .byName }
+            static  func wrapParamsInArray() -> Bool { return false }
+        }
+        do {
+            let p = ParamByName(param1: "FirstParameter", param2: 31)
+            try assertRoundtrip(p)
+        } catch {
+            XCTFail("Unexpected Error: \(error)")
+        }
     }
     
     func testPerformanceExample() {
@@ -97,6 +110,7 @@ private func assertRoundtrip<T: JSONRPCCodable>(_ original: T) throws {
     let request = JSONRPCRequest<T>(params: original)
     let data = try JSONRPCRequestEncoder.encode(original)
     
+    print("encoded: \(String(data: data, encoding: .utf8)!)")
     // Decode
     let decoder = JSONDecoder()
     let decodedRequest = try decoder.decode(JSONRPCRequest<T>.self, from: data)

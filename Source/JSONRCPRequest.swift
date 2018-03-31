@@ -34,10 +34,15 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable {
             
             switch P.paramEncoding() {
             case .byName:
-                print("By name")
-                // TODO: For now, we encode the dictionary in an array, as Ethereum expects. In the future, adding a func shouldWrapParamsInArray() -> Bool to JSONRPCEncodable might make sense
-                var container = container.nestedUnkeyedContainer(forKey: .params)
-                try container.encode(params)
+                if P.wrapParamsInArray() == true {
+                    try container.encode([params], forKey: .params)
+                    // TODO: This creates [{}] as params
+                    // We want: params:[] or no params at all
+                    // Encode nil? or Custom Encoder like ArrayEncoder that returns nil?
+                } else {
+                    // Encode P as dictionary not wrapped in an array
+                    try container.encode(params, forKey: .params)
+                }
             case .byPosition:
                 print("By position")
                 // Encode data into an array
@@ -67,13 +72,23 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable {
         let params: P
         switch P.paramEncoding() {
         case .byName:
-            params = try P(from: decoder)
+            if P.wrapParamsInArray() == true {
+                guard let paramElement = try Array<P>(from: decoder).first else {
+                    throw Error.noParametersFound
+                }
+                params = paramElement
+            } else {
+                fatalError() // Not implemented yet
+            }
         case .byPosition:
             fatalError()
-//            var arrayContainer = try container.nestedUnkeyedContainer(forKey: .params)
-//            arrayContainer.decode(<#T##type: Bool.Type##Bool.Type#>)
+//            Use ArrayDecoder
         }
         
         self.init(params: params, id: id, jsonrpc: jsonrpc)
+    }
+    
+    enum Error: Swift.Error {
+        case noParametersFound
     }
 }

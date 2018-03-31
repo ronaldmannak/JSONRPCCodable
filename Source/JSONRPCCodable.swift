@@ -13,6 +13,9 @@ import Foundation
 public protocol JSONRPCCodable: Codable { //JSONRPCEncodable: Encodable {
     static func method() -> String
     static func paramEncoding() -> JSONRPCParamStructure
+    
+    /// If true, the dictionary of the by name parameters will be wrapped in an array
+    static func wrapParamsInArray() -> Bool
     //    func empty/skip params param if empty
     //    func shouldWrapParamsInArray -> Bool
 }
@@ -25,6 +28,10 @@ public extension JSONRPCCodable {
      */
     static func paramEncoding() -> JSONRPCParamStructure {
         return .byPosition
+    }
+    
+    static func wrapParamsInArray() -> Bool {
+        return true
     }
 }
 
