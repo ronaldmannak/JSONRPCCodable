@@ -21,19 +21,18 @@ class RequestCodableTests: XCTestCase {
         super.tearDown()
     }
     
-    
-//    func testEmptyParamsByPosition() {
-//        struct Ethversion: JSONRPCCodable {
-//            static func method() -> String { return "eth_version" }
-//        }
-//
-//        do {
-//            let ethVersion = Ethversion()
-//            try assertRoundtrip(ethVersion)
-//        } catch {
-//            XCTFail("Unexpected Error: \(error)")
-//        }
-//    } 
+    func testEmptyParamsByPosition() {
+        struct Ethversion: JSONRPCCodable {
+            static func method() -> String { return "eth_version" }
+        }
+
+        do {
+            let ethVersion = Ethversion()
+            try assertRoundtrip(ethVersion)
+        } catch {
+            XCTFail("Unexpected Error: \(error)")
+        }
+    }
     
     func testEmptyParamsByName() {
         struct Ethversion: JSONRPCCodable {
@@ -51,7 +50,6 @@ class RequestCodableTests: XCTestCase {
     
     func testParameterByName() {
         struct ParamByName: JSONRPCCodable {
-            
             let param1: String
             let param2: Int
             
@@ -66,6 +64,27 @@ class RequestCodableTests: XCTestCase {
             XCTFail("Unexpected Error: \(error)")
         }
     }
+    
+    func testEmptyParameterByName() {
+        struct ParamByName: JSONRPCCodable {
+            
+            let param1: String
+            let param2: Int
+            
+            // TODO: check if encoding is correct!
+            
+            static func method() -> String { return "ParamByName" }
+            static func paramEncoding() -> JSONRPCParamStructure { return .byPosition }
+        }
+        do {
+            let p = ParamByName(param1: "FirstParameter", param2: 31)
+            try assertRoundtrip(p)
+        } catch {
+            XCTFail("Unexpected Error: \(error)")
+        }
+    }
+    
+    // Test passing a non JSONRPC dictionary to decoder
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -107,18 +126,14 @@ struct SendTransaction: JSONRPCRequestCodable {
 }
 */
 
-private func assertEqual<T>(_ lhs: T, _ rhs: T) {
-    XCTAssertEqual(String(describing: lhs), String(describing: rhs))
-}
-
 private func assertRoundtrip<T: JSONRPCCodable>(_ original: T) throws {
     // Encode
     let request = JSONRPCRequest<T>(params: original)
     let data = try JSONRPCRequestEncoder.encode(original)
-    
 //    print("encoded: \(String(data: data, encoding: .utf8)!)")
+    
     // Decode
     let decoder = JSONDecoder()
     let decodedRequest = try decoder.decode(JSONRPCRequest<T>.self, from: data)
-//    XCTAssertEqual(request, decodedRequest)
+    XCTAssertEqual(request, decodedRequest)
 }

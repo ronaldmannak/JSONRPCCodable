@@ -10,7 +10,7 @@ import Foundation
 
 /**
  */
-public protocol JSONRPCCodable: Codable { //JSONRPCEncodable: Encodable {
+public protocol JSONRPCCodable: Codable, Equatable { //JSONRPCEncodable: Encodable {
     static func method() -> String
     static func paramEncoding() -> JSONRPCParamStructure
     

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C704BAD32065C12F0085EA61 /* ArrayEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BAD12065C12F0085EA61 /* ArrayEncoder.swift */; };
 		C704BAD42065C12F0085EA61 /* JSONRCPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BAD22065C12F0085EA61 /* JSONRCPRequest.swift */; };
+		C704BAD8206F3DA10085EA61 /* ArrayDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BAD52065C14C0085EA61 /* ArrayDecoder.swift */; };
 		C72472682047442B0023DF67 /* JSONRPCCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72472642047442B0023DF67 /* JSONRPCCodable.swift */; };
 		C72472692047442B0023DF67 /* JSONRPCRequestEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72472652047442B0023DF67 /* JSONRPCRequestEncoder.swift */; };
 		C724726A2047442B0023DF67 /* JSONRPCCodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72472662047442B0023DF67 /* JSONRPCCodableExtension.swift */; };
@@ -206,6 +207,7 @@
 			files = (
 				C72472692047442B0023DF67 /* JSONRPCRequestEncoder.swift in Sources */,
 				C72472682047442B0023DF67 /* JSONRPCCodable.swift in Sources */,
+				C704BAD8206F3DA10085EA61 /* ArrayDecoder.swift in Sources */,
 				C749AA6E2058FC1100377975 /* JSONRPCResultEncoder.swift in Sources */,
 				C704BAD32065C12F0085EA61 /* ArrayEncoder.swift in Sources */,
 				C724726E2047E4CD0023DF67 /* JSONRPCResultDecoder.swift in Sources */,
@@ -349,7 +351,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "JSONRPCCodable-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -365,7 +367,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "JSONRPCCodable-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

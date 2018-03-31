@@ -11,7 +11,7 @@ import Foundation
 /**
 
  */
-public struct JSONRPCRequest<P: JSONRPCCodable>: Codable {
+public struct JSONRPCRequest<P: JSONRPCCodable>: Codable, Equatable {
     public let jsonrpc: String
     public var id: Int64
     public let params: P?
@@ -30,9 +30,6 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable {
         try container.encode(P.method(), forKey: .method)
         try container.encode(id, forKey: .id)
         if let params = params {
-            // Add a check if params is empty. If no params, the params key should either absent or just be an empty array, depending on JSONRPCEncodable's func showParamsKeyIfNoParamsArePresent() -> Bool (or something shorter)
-            // How do we check if params is empty? It's not that we can count the keys, can we?
-            
             switch P.paramEncoding() {
             case .byName:
                 if P.wrapParamsInArray() == true {
@@ -80,8 +77,19 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable {
                 params = try container.decode(P.self, forKey: .params)
             }
         case .byPosition:
-            fatalError()
-//            Use ArrayDecoder
+            print("Start")
+            var paramContainer = try container.nestedUnkeyedContainer(forKey: .params) // this container expects Array<P>! Not unnamed properties in an array
+            params = try paramContainer.decode(P.self) // decodeIfPresent
+            print(params)
+            
+            // Option: create NoParamsContainer in JSONRPCDecoder and change init to: public init(from decoder: JSONPCDecoder) throws {
+            
+//            let paramData = try container.decode(String.self, forKey: .params)
+//            print(paramData)
+//            params = try ArrayDecoder.decode(P.self, from: paramData)
+//            params = try container.decode(P.self, forKey: .params)
+//            print("End")
+//            print (params)
         }
         
         self.init(params: params, id: id, jsonrpc: jsonrpc)
@@ -91,10 +99,4 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable {
         case noParametersFound
     }
 }
-
-//extension JSONRPCRequest: Equatable {
-//    public static func ==(lhs: JSONRPCRequest<P>, rhs: JSONRPCRequest<P>) -> Bool {
-//        <#code#>
-//    }
-//}
 
