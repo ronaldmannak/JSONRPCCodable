@@ -21,27 +21,33 @@ class RequestCodableTests: XCTestCase {
         super.tearDown()
     }
     
-    /*
-    func testEmptyParams() {
+    
+//    func testEmptyParamsByPosition() {
+//        struct Ethversion: JSONRPCCodable {
+//            static func method() -> String { return "eth_version" }
+//        }
+//
+//        do {
+//            let ethVersion = Ethversion()
+//            try assertRoundtrip(ethVersion)
+//        } catch {
+//            XCTFail("Unexpected Error: \(error)")
+//        }
+//    } 
+    
+    func testEmptyParamsByName() {
         struct Ethversion: JSONRPCCodable {
-            static func method() -> String {
-                return "eth_version"
-            }
-            static func paramEncoding() -> JSONRPCParamStructure {
-                return .byName
-            }
+            static func method() -> String { return "eth_version" }
+            static func paramEncoding() -> JSONRPCParamStructure { return .byName }
         }
         
         do {
             let ethVersion = Ethversion()
             try assertRoundtrip(ethVersion)
-//            let result = try JSONRPCRequestEncoder.encode(ethVersion)
-//            print(result)
         } catch {
             XCTFail("Unexpected Error: \(error)")
         }
-    } */
-    
+    }
     
     func testParameterByName() {
         struct ParamByName: JSONRPCCodable {
@@ -51,7 +57,7 @@ class RequestCodableTests: XCTestCase {
             
             static func method() -> String { return "ParamByName" }
             static func paramEncoding() -> JSONRPCParamStructure { return .byName }
-            static  func wrapParamsInArray() -> Bool { return false }
+            static func wrapParamsInArray() -> Bool { return true }
         }
         do {
             let p = ParamByName(param1: "FirstParameter", param2: 31)
@@ -110,15 +116,9 @@ private func assertRoundtrip<T: JSONRPCCodable>(_ original: T) throws {
     let request = JSONRPCRequest<T>(params: original)
     let data = try JSONRPCRequestEncoder.encode(original)
     
-    print("encoded: \(String(data: data, encoding: .utf8)!)")
+//    print("encoded: \(String(data: data, encoding: .utf8)!)")
     // Decode
     let decoder = JSONDecoder()
     let decodedRequest = try decoder.decode(JSONRPCRequest<T>.self, from: data)
-
-    print(request)
-    print(decodedRequest)
-        
-//        let roundtripped = try JSONRPCRequestDecoder.decode(T.self, data: data)
-//        AssertEqual(original, roundtripped)
-
+//    XCTAssertEqual(request, decodedRequest)
 }
