@@ -17,6 +17,7 @@
 		C749AA6E2058FC1100377975 /* JSONRPCResultEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C724726B2047E4CD0023DF67 /* JSONRPCResultEncoder.swift */; };
 		C7C2DCC320731B210014DAE4 /* HexProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C2DCC220731B210014DAE4 /* HexProtocol.swift */; };
 		C7C2DCC520734DA60014DAE4 /* HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C2DCC420734DA60014DAE4 /* HexString.swift */; };
+		C7C2DCC720741CE90014DAE4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C2DCC620741CE90014DAE4 /* Data.swift */; };
 		C7F6E90B204742A100BFAEAC /* libJSONRPCCodable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F6E8F62047400C00BFAEAC /* libJSONRPCCodable.a */; };
 		C7F6E91B2047430A00BFAEAC /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F6E908204742A100BFAEAC /* Tests.swift */; };
 /* End PBXBuildFile section */
@@ -55,6 +56,7 @@
 		C724726C2047E4CD0023DF67 /* JSONRPCResultDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCResultDecoder.swift; path = ../Source/JSONRPCResultDecoder.swift; sourceTree = "<group>"; };
 		C7C2DCC220731B210014DAE4 /* HexProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HexProtocol.swift; path = ../Source/HexProtocol.swift; sourceTree = "<group>"; };
 		C7C2DCC420734DA60014DAE4 /* HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HexString.swift; path = ../Source/HexString.swift; sourceTree = "<group>"; };
+		C7C2DCC620741CE90014DAE4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		C7F6E8F62047400C00BFAEAC /* libJSONRPCCodable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJSONRPCCodable.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F6E906204742A100BFAEAC /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F6E908204742A100BFAEAC /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				C704BAD12065C12F0085EA61 /* ArrayEncoder.swift */,
 				C7C2DCC220731B210014DAE4 /* HexProtocol.swift */,
 				C7C2DCC420734DA60014DAE4 /* HexString.swift */,
+				C7C2DCC620741CE90014DAE4 /* Data.swift */,
 				C7F6E907204742A100BFAEAC /* Tests */,
 				C7F6E8F72047400C00BFAEAC /* Products */,
 				C7F6E912204742E600BFAEAC /* JSONRPCCodable-Bridging-Header.h */,
@@ -215,6 +218,7 @@
 				C72472692047442B0023DF67 /* JSONRPCRequestEncoder.swift in Sources */,
 				C72472682047442B0023DF67 /* JSONRPCCodable.swift in Sources */,
 				C704BAD8206F3DA10085EA61 /* ArrayDecoder.swift in Sources */,
+				C7C2DCC720741CE90014DAE4 /* Data.swift in Sources */,
 				C7C2DCC320731B210014DAE4 /* HexProtocol.swift in Sources */,
 				C749AA6E2058FC1100377975 /* JSONRPCResultEncoder.swift in Sources */,
 				C704BAD32065C12F0085EA61 /* ArrayEncoder.swift in Sources */,

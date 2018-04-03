@@ -47,9 +47,11 @@ public extension ArrayDecoder {
             } else {
                 return "\(item)" as! T
             }
-//        case is Int.Type, is Int8.Type, is Int16.Type, is Int32.Type, is Int64.Type:
+            // It would be great if we could use generics here, something like...
+//        case is Int.Type, is Int8.Type, is Int16.Type, is Int32.Type, is Int64.Type, is UInt.Type, is UInt8.Type, is UInt16.Type, is UInt32.Type, is UInt64.Type:
 //            if let item = item as? String {
 //                if decodeHexStrings == true, item.has0xPrefix == true, let value = item.hexToNumeric(type: T) {
+//                 // Received a hex string
 //                    return value as! T
 //                } else if let value = type(item) {
 //                    // Received value embedded in a string
@@ -153,11 +155,10 @@ public extension ArrayDecoder {
             throw Error.typeNotConformingToJSONRPCCodable(type)
         case is Data.Type:
             // Unformatted data in Ethereum is encoded in a hex string
-            if let string = item as? String, string.has0xPrefix {
-                
+            if let string = item as? String, string.has0xPrefix, let data = Data(hexString: string) {
+                return data as! T
             }
-            fatalError()
-            return Data() as! T
+            throw Error.typeNotConformingToJSONRPCCodable(type)
         default:
             throw Error.typeNotConformingToJSONRPCCodable(type)
         }
@@ -272,8 +273,5 @@ public extension ArrayDecoder {
         /// require `BinaryDecodable` because `BinaryDecoder` doesn't support full keyed
         /// coding functionality.)
         case typeNotConformingToJSONRPCCodable(Decodable.Type)
-        
-        /// Attempted to decode a type which is not `Decodable`.
-//        case typeNotConformingToDecodable(Any.Type)
     }
 }

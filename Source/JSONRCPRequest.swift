@@ -85,11 +85,9 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable, Equatable {
             } else {
                 print(array)
                 let decoder = ArrayDecoder(array: array)
-//                let decoder = ArrayDecoder(array: ["FirstParameter", "0x1f"])
                 params = try P(from: decoder)
                 print(params)
             }
-
         }
         
         self.init(params: params, id: id, jsonrpc: jsonrpc)

@@ -42,7 +42,17 @@ extension String {
     public var hexToUInt32: UInt32? { return UInt32(drop0xPrefix(), radix: 16) }
     public var hexToUInt64: UInt64? { return UInt64(drop0xPrefix(), radix: 16) }
     public var hexToData:   Data? {
-        fatalError() // TODO
-        return Data()
+        var hex = self.drop0xPrefix()
+        var data = Data()
+        while(hex.count > 0) {
+            let subIndex = hex.index(hex.startIndex, offsetBy: 2)
+            let c = String(hex[..<subIndex])
+            hex = String(hex[subIndex...])
+            var ch: UInt32 = 0
+            Scanner(string: c).scanHexInt32(&ch)
+            var char = UInt8(ch)
+            data.append(&char, count: 1)
+        }
+        return data
     }
 }
