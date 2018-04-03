@@ -77,19 +77,19 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable, Equatable {
                 params = try container.decode(P.self, forKey: .params)
             }
         case .byPosition:
-            print("Start")
-            var paramContainer = try container.nestedUnkeyedContainer(forKey: .params) // this container expects Array<P>! Not unnamed properties in an array
-            params = try paramContainer.decode(P.self) // decodeIfPresent
-            print(params)
-            
-            // Option: create NoParamsContainer in JSONRPCDecoder and change init to: public init(from decoder: JSONPCDecoder) throws {
-            
-//            let paramData = try container.decode(String.self, forKey: .params)
-//            print(paramData)
-//            params = try ArrayDecoder.decode(P.self, from: paramData)
-//            params = try container.decode(P.self, forKey: .params)
-//            print("End")
-//            print (params)
+                        
+            //  array out of container
+            let array = try container.decode([String].self, forKey: .params)
+            if array.isEmpty {
+                params = try P(from: decoder)
+            } else {
+                print(array)
+                let decoder = ArrayDecoder(array: array)
+//                let decoder = ArrayDecoder(array: ["FirstParameter", "0x1f"])
+                params = try P(from: decoder)
+                print(params)
+            }
+
         }
         
         self.init(params: params, id: id, jsonrpc: jsonrpc)
