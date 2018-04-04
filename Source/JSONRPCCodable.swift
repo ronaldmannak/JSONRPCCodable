@@ -14,10 +14,12 @@ public protocol JSONRPCCodable: Codable, Equatable { //JSONRPCEncodable: Encodab
     static func method() -> String
     static func paramEncoding() -> JSONRPCParamStructure
     
-    /// If true, the dictionary of the by name parameters will be wrapped in an array
+    /// If true, the dictionary of the by name parameters will be wrapped in an array when encoded in a .byName dictionary
     static func wrapParamsInArray() -> Bool
-    //    func empty/skip params param if empty
-    //    func shouldWrapParamsInArray -> Bool
+
+//    static func encodeAsHex() -> {
+//    
+//    }
 }
 
 // Default implementation for JSONRPCCodable

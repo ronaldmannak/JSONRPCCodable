@@ -12,13 +12,26 @@ import Foundation
  */
 public class ArrayEncoder {
     var array = [String]()  //  Current limitation: encode can only encode to [String], not [Encodable], so even ints are wrapped in strings
+    let hexEncoded: [String]?
+    
+    
+    public init(hexEncoded: [String]?) {
+        self.hexEncoded = hexEncoded
+    }
 }
 
 extension ArrayEncoder {
+    
+
     /**
     
      */
     public static func encode<P: Encodable>(_ value: P) throws -> [String] {
+        let mirror = Mirror(reflecting: value)
+        for child in mirror.children {
+            print("label: " + child.label!)
+            print("value: \(child.value)")
+        }
         let encoder = ArrayEncoder()
         try value.encode(to: encoder)
         return encoder.array
