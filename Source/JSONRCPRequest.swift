@@ -40,7 +40,7 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable, Equatable {
                 }
             case .byPosition:
                 // Encode data into an array
-                let array = try ArrayEncoder.encode(params)
+                let array = try JSONRPCArrayEncoder.encode(params)
                 try container.encode(array, forKey: .params)
             }
         }
@@ -69,7 +69,7 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable, Equatable {
             if P.wrapParamsInArray() == true {
                 // Parameter dictionary is wrapped in an array
                 guard let paramElement = try container.decode([P].self, forKey: .params).first else {
-                    throw Error.noParametersFound
+                    throw JSONRPCError.noParametersFound
                 }
                 params = paramElement
             } else {
@@ -84,17 +84,12 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable, Equatable {
                 params = try P(from: decoder)
             } else {
                 print(array)
-                let decoder = ArrayDecoder(array: array)
+                let decoder = JSONRPCArrayDecoder(array: array)
                 params = try P(from: decoder)
                 print(params)
             }
         }
-        
         self.init(params: params, id: id, jsonrpc: jsonrpc)
-    }
-    
-    enum Error: Swift.Error {
-        case noParametersFound
     }
 }
 

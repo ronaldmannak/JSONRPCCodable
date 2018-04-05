@@ -1,5 +1,5 @@
 //
-//  ArrayDecoder.swift
+//  JSONRPCArrayDecoder.swift
 //  JSONRPCCodable
 //
 //  Created by Ronald "Danger" Mannak on 3/23/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ArrayDecoder {
+public class JSONRPCArrayDecoder {
     fileprivate var array: [Decodable]
     fileprivate var counter = 0
     
@@ -20,16 +20,16 @@ public class ArrayDecoder {
     }
 }
 
-public extension ArrayDecoder {
+public extension JSONRPCArrayDecoder {
 
     public static func decode<T: Decodable>(_ type: T.Type, from: [Decodable]) throws -> T {
-        return try ArrayDecoder(array: from).decode(T.self)
+        return try JSONRPCArrayDecoder(array: from).decode(T.self)
     }
     
 }
 
 // Decoding
-public extension ArrayDecoder {
+public extension JSONRPCArrayDecoder {
     // What happens is that T.init(decoder) on line 27 called decode(FirstTypeOfStruct), decode(SecondTypeOfStruct), etc. So we read the next item in the array and convert it to Type and return it!
     
     public func decode<T>(_ type: T.Type) throws -> T where T : Decodable {
@@ -175,7 +175,7 @@ public extension ArrayDecoder {
 }
 
 /// Containers
-extension ArrayDecoder: Decoder {
+extension JSONRPCArrayDecoder: Decoder {
     public var codingPath: [CodingKey] { return [] }
     
     public var userInfo: [CodingUserInfoKey : Any] { return [:] }
@@ -193,7 +193,7 @@ extension ArrayDecoder: Decoder {
     }
     
     private struct KeyedContainer<Key: CodingKey>: KeyedDecodingContainerProtocol {
-        var decoder: ArrayDecoder
+        var decoder: JSONRPCArrayDecoder
         
         var codingPath: [CodingKey] { return [] }
         
@@ -229,7 +229,7 @@ extension ArrayDecoder: Decoder {
     }
     
     private struct UnkeyedContainer: UnkeyedDecodingContainer, SingleValueDecodingContainer {
-        var decoder: ArrayDecoder
+        var decoder: JSONRPCArrayDecoder
         
         var codingPath: [CodingKey] { return [] }
         
@@ -262,7 +262,7 @@ extension ArrayDecoder: Decoder {
 }
 
 /// Errors
-public extension ArrayDecoder {
+public extension JSONRPCArrayDecoder {
     
     /// All errors which `ArrayDecoder` itself can throw.
     enum Error: Swift.Error {

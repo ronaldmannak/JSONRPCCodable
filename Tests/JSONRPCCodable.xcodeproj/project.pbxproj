@@ -7,16 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C704BAD32065C12F0085EA61 /* ArrayEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BAD12065C12F0085EA61 /* ArrayEncoder.swift */; };
+		C704BAD32065C12F0085EA61 /* JSONRPCArrayEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BAD12065C12F0085EA61 /* JSONRPCArrayEncoder.swift */; };
 		C704BAD42065C12F0085EA61 /* JSONRCPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BAD22065C12F0085EA61 /* JSONRCPRequest.swift */; };
-		C704BAD8206F3DA10085EA61 /* ArrayDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BAD52065C14C0085EA61 /* ArrayDecoder.swift */; };
+		C704BAD8206F3DA10085EA61 /* JSONRPCArrayDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BAD52065C14C0085EA61 /* JSONRPCArrayDecoder.swift */; };
 		C72472682047442B0023DF67 /* JSONRPCCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72472642047442B0023DF67 /* JSONRPCCodable.swift */; };
 		C72472692047442B0023DF67 /* JSONRPCRequestEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72472652047442B0023DF67 /* JSONRPCRequestEncoder.swift */; };
 		C724726A2047442B0023DF67 /* JSONRPCCodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72472662047442B0023DF67 /* JSONRPCCodableExtension.swift */; };
 		C724726E2047E4CD0023DF67 /* JSONRPCResultDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C724726C2047E4CD0023DF67 /* JSONRPCResultDecoder.swift */; };
 		C749AA6E2058FC1100377975 /* JSONRPCResultEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C724726B2047E4CD0023DF67 /* JSONRPCResultEncoder.swift */; };
-		C7C2DCC320731B210014DAE4 /* HexProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C2DCC220731B210014DAE4 /* HexProtocol.swift */; };
-		C7C2DCC520734DA60014DAE4 /* HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C2DCC420734DA60014DAE4 /* HexString.swift */; };
+		C796077B207553AD00A5DF96 /* JSONRPCHexCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796077A207553AD00A5DF96 /* JSONRPCHexCodable.swift */; };
+		C796077D20757A9100A5DF96 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796077C20757A9100A5DF96 /* JSONRPCError.swift */; };
+		C796077F207592D500A5DF96 /* TypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796077E207592D500A5DF96 /* TypeTests.swift */; };
+		C79607812075FE4200A5DF96 /* EthereumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79607802075FE4200A5DF96 /* EthereumTests.swift */; };
+		C7C2DCC520734DA60014DAE4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C2DCC420734DA60014DAE4 /* String.swift */; };
 		C7C2DCC720741CE90014DAE4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C2DCC620741CE90014DAE4 /* Data.swift */; };
 		C7F6E90B204742A100BFAEAC /* libJSONRPCCodable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F6E8F62047400C00BFAEAC /* libJSONRPCCodable.a */; };
 		C7F6E91B2047430A00BFAEAC /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F6E908204742A100BFAEAC /* Tests.swift */; };
@@ -45,17 +48,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C704BAD12065C12F0085EA61 /* ArrayEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrayEncoder.swift; path = ../Source/ArrayEncoder.swift; sourceTree = "<group>"; };
+		C704BAD12065C12F0085EA61 /* JSONRPCArrayEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCArrayEncoder.swift; path = ../Source/JSONRPCArrayEncoder.swift; sourceTree = "<group>"; };
 		C704BAD22065C12F0085EA61 /* JSONRCPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRCPRequest.swift; path = ../Source/JSONRCPRequest.swift; sourceTree = "<group>"; };
-		C704BAD52065C14C0085EA61 /* ArrayDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArrayDecoder.swift; path = ../Source/ArrayDecoder.swift; sourceTree = "<group>"; };
+		C704BAD52065C14C0085EA61 /* JSONRPCArrayDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSONRPCArrayDecoder.swift; path = ../Source/JSONRPCArrayDecoder.swift; sourceTree = "<group>"; };
 		C72472632047442B0023DF67 /* JSONRPCRequestDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCRequestDecoder.swift; path = ../Source/JSONRPCRequestDecoder.swift; sourceTree = "<group>"; };
 		C72472642047442B0023DF67 /* JSONRPCCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCCodable.swift; path = ../Source/JSONRPCCodable.swift; sourceTree = "<group>"; };
 		C72472652047442B0023DF67 /* JSONRPCRequestEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCRequestEncoder.swift; path = ../Source/JSONRPCRequestEncoder.swift; sourceTree = "<group>"; };
 		C72472662047442B0023DF67 /* JSONRPCCodableExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCCodableExtension.swift; path = ../Source/JSONRPCCodableExtension.swift; sourceTree = "<group>"; };
 		C724726B2047E4CD0023DF67 /* JSONRPCResultEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCResultEncoder.swift; path = ../Source/JSONRPCResultEncoder.swift; sourceTree = "<group>"; };
 		C724726C2047E4CD0023DF67 /* JSONRPCResultDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCResultDecoder.swift; path = ../Source/JSONRPCResultDecoder.swift; sourceTree = "<group>"; };
-		C7C2DCC220731B210014DAE4 /* HexProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HexProtocol.swift; path = ../Source/HexProtocol.swift; sourceTree = "<group>"; };
-		C7C2DCC420734DA60014DAE4 /* HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HexString.swift; path = ../Source/HexString.swift; sourceTree = "<group>"; };
+		C796077A207553AD00A5DF96 /* JSONRPCHexCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSONRPCHexCodable.swift; path = ../Source/JSONRPCHexCodable.swift; sourceTree = "<group>"; };
+		C796077C20757A9100A5DF96 /* JSONRPCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
+		C796077E207592D500A5DF96 /* TypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeTests.swift; sourceTree = "<group>"; };
+		C79607802075FE4200A5DF96 /* EthereumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumTests.swift; sourceTree = "<group>"; };
+		C7C2DCC420734DA60014DAE4 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = String.swift; path = ../Source/String.swift; sourceTree = "<group>"; };
 		C7C2DCC620741CE90014DAE4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		C7F6E8F62047400C00BFAEAC /* libJSONRPCCodable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJSONRPCCodable.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F6E906204742A100BFAEAC /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,16 +93,17 @@
 			isa = PBXGroup;
 			children = (
 				C72472642047442B0023DF67 /* JSONRPCCodable.swift */,
+				C796077A207553AD00A5DF96 /* JSONRPCHexCodable.swift */,
 				C72472662047442B0023DF67 /* JSONRPCCodableExtension.swift */,
 				C704BAD22065C12F0085EA61 /* JSONRCPRequest.swift */,
 				C72472632047442B0023DF67 /* JSONRPCRequestDecoder.swift */,
 				C72472652047442B0023DF67 /* JSONRPCRequestEncoder.swift */,
 				C724726C2047E4CD0023DF67 /* JSONRPCResultDecoder.swift */,
 				C724726B2047E4CD0023DF67 /* JSONRPCResultEncoder.swift */,
-				C704BAD52065C14C0085EA61 /* ArrayDecoder.swift */,
-				C704BAD12065C12F0085EA61 /* ArrayEncoder.swift */,
-				C7C2DCC220731B210014DAE4 /* HexProtocol.swift */,
-				C7C2DCC420734DA60014DAE4 /* HexString.swift */,
+				C704BAD52065C14C0085EA61 /* JSONRPCArrayDecoder.swift */,
+				C704BAD12065C12F0085EA61 /* JSONRPCArrayEncoder.swift */,
+				C796077C20757A9100A5DF96 /* JSONRPCError.swift */,
+				C7C2DCC420734DA60014DAE4 /* String.swift */,
 				C7C2DCC620741CE90014DAE4 /* Data.swift */,
 				C7F6E907204742A100BFAEAC /* Tests */,
 				C7F6E8F72047400C00BFAEAC /* Products */,
@@ -117,6 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				C7F6E908204742A100BFAEAC /* Tests.swift */,
+				C796077E207592D500A5DF96 /* TypeTests.swift */,
+				C79607802075FE4200A5DF96 /* EthereumTests.swift */,
 				C7F6E90A204742A100BFAEAC /* Info.plist */,
 			);
 			path = Tests;
@@ -214,14 +223,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7C2DCC520734DA60014DAE4 /* HexString.swift in Sources */,
+				C7C2DCC520734DA60014DAE4 /* String.swift in Sources */,
 				C72472692047442B0023DF67 /* JSONRPCRequestEncoder.swift in Sources */,
 				C72472682047442B0023DF67 /* JSONRPCCodable.swift in Sources */,
-				C704BAD8206F3DA10085EA61 /* ArrayDecoder.swift in Sources */,
+				C704BAD8206F3DA10085EA61 /* JSONRPCArrayDecoder.swift in Sources */,
+				C796077B207553AD00A5DF96 /* JSONRPCHexCodable.swift in Sources */,
 				C7C2DCC720741CE90014DAE4 /* Data.swift in Sources */,
-				C7C2DCC320731B210014DAE4 /* HexProtocol.swift in Sources */,
+				C796077D20757A9100A5DF96 /* JSONRPCError.swift in Sources */,
 				C749AA6E2058FC1100377975 /* JSONRPCResultEncoder.swift in Sources */,
-				C704BAD32065C12F0085EA61 /* ArrayEncoder.swift in Sources */,
+				C704BAD32065C12F0085EA61 /* JSONRPCArrayEncoder.swift in Sources */,
 				C724726E2047E4CD0023DF67 /* JSONRPCResultDecoder.swift in Sources */,
 				C724726A2047442B0023DF67 /* JSONRPCCodableExtension.swift in Sources */,
 				C704BAD42065C12F0085EA61 /* JSONRCPRequest.swift in Sources */,
@@ -232,7 +242,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C79607812075FE4200A5DF96 /* EthereumTests.swift in Sources */,
 				C7F6E91B2047430A00BFAEAC /* Tests.swift in Sources */,
+				C796077F207592D500A5DF96 /* TypeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

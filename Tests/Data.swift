@@ -25,4 +25,8 @@ extension Data {
         }
         self = data
     }
+    
+    var hexDescription: String {
+        return "0x" + reduce("") {$0 + String(format: "%02x", $1)}
+    }
 }

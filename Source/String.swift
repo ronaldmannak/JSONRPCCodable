@@ -1,5 +1,5 @@
 //
-//  HexString.swift
+//  String.swift
 //  JSONRPCCodable
 //
 //  Created by Ronald "Danger" Mannak on 4/2/18.
@@ -10,18 +10,15 @@
 import Foundation
 
 extension String {
-
-//    public var isHex: Bool {
-//        var string = drop0xPrefix()
-//
-//
-//        let chars = CharacterSet(charactersIn: "0123456789ABCDEF")
-//        return string.rangeOfCharacter(from: chars, options: .caseInsensitive) == nil ?
-//        guard string.uppercased().rangeOfCharacter(from: chars) == nil else {
-//            return false
-//        }
-//        return true
-//    }
+    
+    public var isHex: Bool {
+        let string = drop0xPrefix()
+        guard string.count % 2 == 0 else { return false }
+        guard string.isEmpty == false else { return false }
+        
+        let chars = CharacterSet(charactersIn: "0123456789ABCDEF").inverted
+        return string.uppercased().rangeOfCharacter(from: chars) == nil        
+    }
     
     /// Returns true if self has 0x prefix
     public var has0xPrefix: Bool { return hasPrefix("0x") }
