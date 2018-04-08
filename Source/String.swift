@@ -13,7 +13,8 @@ extension String {
     
     public var isHex: Bool {
         let string = drop0xPrefix()
-        guard string.count % 2 == 0 else { return false }
+        // A hex must have even number of characters, or 1 (e.g. 0x1 or 0x0 is valid in Ethereum)
+        guard string.count % 2 == 0 || string.count == 1 else { return false }
         guard string.isEmpty == false else { return false }
         
         let chars = CharacterSet(charactersIn: "0123456789ABCDEF").inverted

@@ -20,11 +20,10 @@ public protocol JSONRPCHexCodable {
 }
 
 public extension JSONRPCHexCodable {
-    static var hexKeys: [String] { return [] }
  
     // TODO: Clean up this code
     // We also might want to throw if hexKeys contains a key that is not in children
-    func hexEncodedOrder() throws -> ([Int], [String]) {
+    func hexEncodedOrder() -> ([Int], [String]) {
         let mirror = Mirror(reflecting: self)
         var i = 0
         var hexIndices = [Int]()

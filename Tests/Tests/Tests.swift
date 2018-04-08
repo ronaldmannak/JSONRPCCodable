@@ -8,7 +8,7 @@
 
 import XCTest
 import JSONRPCCodable
-
+/*
 class RequestCodableTests: XCTestCase {
     
     override func setUp() {
@@ -103,17 +103,8 @@ class RequestCodableTests: XCTestCase {
         }
     }
     
-    private func assertRoundtrip<T: JSONRPCCodable>(_ original: T) throws {
-        // Encode
-        let request = JSONRPCRequest<T>(params: original)
-        let data = try JSONRPCRequestEncoder.encode(original)
-            print("encoded: \(String(data: data, encoding: .utf8)!)")
-        
-        // Decode
-        let decoder = JSONDecoder()
-        let decodedRequest = try decoder.decode(JSONRPCRequest<T>.self, from: data)
-        XCTAssertEqual(request, decodedRequest)
-    }
-}
+} */
+
+
 
 
