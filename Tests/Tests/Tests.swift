@@ -8,7 +8,7 @@
 
 import XCTest
 import JSONRPCCodable
-/*
+
 class RequestCodableTests: XCTestCase {
     
     override func setUp() {
@@ -103,7 +103,7 @@ class RequestCodableTests: XCTestCase {
         }
     }
     
-} */
+}
 
 
 

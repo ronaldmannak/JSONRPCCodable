@@ -8,7 +8,7 @@
 
 import XCTest
 import JSONRPCCodable
-/*
+
 class TypeTests: XCTestCase {
 
     override func setUp() {
@@ -48,4 +48,4 @@ class TypeTests: XCTestCase {
         XCTAssert(i3.hexValue == "0x02")
         XCTAssert(i3.hexValue.hexToInt! == 2)
     }
-}*/
+}

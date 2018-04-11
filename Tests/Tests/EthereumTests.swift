@@ -65,12 +65,31 @@ class EthereumTests: XCTestCase {
             try assertRoundtrip(uncle)
             
             let encodedParams = try params(codable: uncle)
-            XCTAssertEqual(encodedParams as! [String], ["0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b", "0x0"])
+            XCTAssertEqual(encodedParams as! [String], ["0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b", "0x00"])
         } catch {
             XCTFail("Unexpected Error: \(error)")
         }
     }
     
     // eth_uninstallFilter
+    // Expected result: {"jsonrpc":"2.0","method":"eth_uninstallFilter","params":["0xb"],"id":73}
+    
+    func testEthUninstallFilter() {
+        struct UninstallFilter: JSONRPCCodable, JSONRPCHexCodable, Equatable {
+            let filterId: Int
+            static func method() -> String { return "eth_uninstallFilter" }
+            static var hexKeys: [String] { return ["filterId"] }
+//            static func == (lhs: UninstallFilter, rhs: UninstallFilter) -> Bool { lhs.filterId == rhs.filterId }
+        }
+        let filter = UninstallFilter(filterId: 11)
+        do {
+            try assertRoundtrip(filter)
+            let encodedParams = try params(codable: filter)
+            XCTAssertEqual(encodedParams as! [String], ["0x0b"])
+        } catch {
+            XCTFail("Unexpected Error: \(error)")
+        }
+    }
+
 
 }
