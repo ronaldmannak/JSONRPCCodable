@@ -21,31 +21,78 @@ class EthereumTests: XCTestCase {
         super.tearDown()
     }
     
-//    func testGetTransactionByBlock() {
-//
-//        struct TransactionByBlock: JSONRPCCodable, JSONRPCHexCodable {
-//            enum DefaultBlock: JSONRPCHexCodable {
-//
-//                case blockNumber(Int)
-//                case earliest, latest, pending
-//
-//                static var hexKeys: [String] { return ["blockNumber"] }
-//            }
-//            let blockNumber: Int
-//
-//
-//            let quantity: Int
-//
-//            static func method() -> String {
-//                return "eth_getTransactionByBlockNumberAndIndex"
-//            }
-//        }
-//
-//        // {"jsonrpc":"2.0","method":"eth_getTransactionByBlockNumberAndIndex","params":["0x29c", "0x0"],"id":1}
-//
-////        let
-//    }
+    
+    // Expected:
+    // {"jsonrpc":"2.0","method":"eth_getTransactionByBlockNumberAndIndex","params":["0x29c", "0x0"],"id":1}
+    func testGetTransactionByBlock() {
 
+        struct TransactionByBlock: JSONRPCCodable, JSONRPCHexCodable {
+            
+            enum DefaultBlock: Codable, Equatable {
+                
+                case blockNumber(Int)
+                case earliest, latest, pending
+                
+                init(from decoder: Decoder) throws {
+                    
+                    if let decoder = decoder as? JSONRPCArrayDecoder {
+                        guard let value = decoder.readCurrent() as? String else {
+                            throw JSONRPCError.typeNotSupported
+                        }
+                        if let blockNumber = value.hexToInt {
+                            self = .blockNumber(blockNumber)
+                        } else if value == "earliest" {
+                            self = .earliest
+                        } else if value == "latest" {
+                            self = .latest
+                        } else if value == "pending" {
+                            self = .pending
+                        } else {
+                            throw JSONRPCError.typeNotSupported
+                        }
+                    } else {
+                        throw JSONRPCError.typeNotSupported
+                    }
+                }
+                
+                func encode(to encoder: Encoder) throws {
+                    if let encoder = encoder as? JSONRPCArrayEncoder {
+                        switch self {
+                        case .earliest:
+                            encoder.append("earliest")
+                        case .latest:
+                            encoder.append("latest")
+                        case .pending:
+                            encoder.append("pending")
+                        case .blockNumber(let number):
+                            encoder.append(number.hexValue)
+                        }
+                    } else {
+                        throw JSONRPCError.typeNotSupported
+                    }
+                }
+            }
+            
+            let blockNumber: DefaultBlock
+            let indexPosition: Int
+
+            static func method() -> String {
+                return "eth_getTransactionByBlockNumberAndIndex"
+            }
+            
+            static var hexKeys: [String] { return ["blockNumber", "indexPosition"] } //<- this doesn't work in JSONRPCArrayEncoder:57 since DefaultBlock isn't a known type
+        }
+
+        let transaction = TransactionByBlock(blockNumber: .blockNumber(668), indexPosition: 0)
+        do {
+            try assertRoundtrip(transaction)
+            let encodedParams = try params(codable: transaction)
+            XCTAssertEqual(encodedParams as! [String], ["0x029c", "0x00"])
+        } catch {
+            XCTFail("Unexpected Error: \(error)")
+        }
+    }
+    
     // Expected request:
     // {"jsonrpc":"2.0","method":"eth_getUncleByBlockHashAndIndex","params":["0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b", "0x0"],"id":1}
     func testGetUncleByBlockHash() {
@@ -79,7 +126,6 @@ class EthereumTests: XCTestCase {
             let filterId: Int
             static func method() -> String { return "eth_uninstallFilter" }
             static var hexKeys: [String] { return ["filterId"] }
-//            static func == (lhs: UninstallFilter, rhs: UninstallFilter) -> Bool { lhs.filterId == rhs.filterId }
         }
         let filter = UninstallFilter(filterId: 11)
         do {
@@ -90,6 +136,5 @@ class EthereumTests: XCTestCase {
             XCTFail("Unexpected Error: \(error)")
         }
     }
-
 
 }

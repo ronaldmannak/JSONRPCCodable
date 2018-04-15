@@ -52,60 +52,62 @@ extension JSONRPCArrayEncoder {
     }
     
     public func encode<P: Encodable>(_ encodable: P) throws {
-        let item: String
-        print("e: \(encodable), indices: \(String(describing: hexEncodingIndices))")
+//        print("e: \(encodable.self), indices: \(String(describing: hexEncodingIndices))")
+        
         if let indices = hexEncodingIndices, indices.contains(index) {
             // This paramater needs to be hex encoded
-            
-            // Encode in hexadecimal
             switch encodable {
                 // Can we do something like... ?
 //            case let i = encodable as? FixedWidthInteger:
-//                item = i.hexValue
+//                appendHexString(encodable)
             case is Int:
-                item = (encodable as! Int).hexValue
+                appendHexString(encodable as! Int)
             case is Int8:
-                item = (encodable as! Int8).hexValue
+                appendHexString(encodable as! Int8)
             case is Int16:
-                item = (encodable as! Int16).hexValue
+                appendHexString(encodable as! Int16)
             case is Int32:
-                item = (encodable as! Int32).hexValue
+                appendHexString(encodable as! Int32)
             case is Int64:
-                item = (encodable as! Int64).hexValue
+                appendHexString(encodable as! Int64)
             case is UInt:
-                item = (encodable as! UInt).hexValue
+                appendHexString(encodable as! UInt)
             case is UInt8:
-                item = (encodable as! UInt8).hexValue
+                appendHexString(encodable as! UInt8)
             case is UInt16:
-                item = (encodable as! UInt16).hexValue
-            case is Int32:
-                item = (encodable as! UInt32).hexValue
-            case is Int64:
-                item = (encodable as! UInt64).hexValue
-            case is Data.Type:
-                item = "0x" + (encodable as! Data).hexDescription
-            case is String.Type:
-                if let data = (encodable as! String).data(using: .utf8) {
-                    item = data.hexDescription
-                } else {
+                appendHexString(encodable as! UInt16)
+            case is UInt32:
+                appendHexString(encodable as! UInt32)
+            case is UInt64:
+                appendHexString(encodable as! UInt64)
+            case is Data:
+                append((encodable as! Data).hexDescription)
+            case is String:
+                guard let data = (encodable as! String).data(using: .utf8) else {
                     throw JSONRPCError.typeNotSupported
                 }
+                append(data.hexDescription)                    
+            case is Codable:
+                try encodable.encode(to: self)
             default:
                 throw JSONRPCError.typeNotSupported
             }
         } else if let encodable = encodable as? String {
-            item = encodable
+            // Add String (no Hex conversion)
+            append(encodable)
         } else {
-            item = "\(encodable)"
+            append("\(encodable)")
         }
-        append(item)
     }
     
-    fileprivate func append(_ item: String) {
+    public func append(_ item: String) {
         array.append(item)
         index = index + 1
     }
     
+    public func appendHexString<P: FixedWidthInteger>(_ item: P) {
+        append(item.hexValue)
+    }
 }
 
 extension JSONRPCArrayEncoder: Encoder {

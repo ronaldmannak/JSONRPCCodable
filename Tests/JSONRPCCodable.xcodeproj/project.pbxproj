@@ -15,7 +15,6 @@
 		C724726A2047442B0023DF67 /* JSONRPCCodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72472662047442B0023DF67 /* JSONRPCCodableExtension.swift */; };
 		C724726E2047E4CD0023DF67 /* JSONRPCResultDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C724726C2047E4CD0023DF67 /* JSONRPCResultDecoder.swift */; };
 		C749AA6E2058FC1100377975 /* JSONRPCResultEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C724726B2047E4CD0023DF67 /* JSONRPCResultEncoder.swift */; };
-		C796077B207553AD00A5DF96 /* JSONRPCHexCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796077A207553AD00A5DF96 /* JSONRPCHexCodable.swift */; };
 		C796077D20757A9100A5DF96 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796077C20757A9100A5DF96 /* JSONRPCError.swift */; };
 		C796077F207592D500A5DF96 /* TypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796077E207592D500A5DF96 /* TypeTests.swift */; };
 		C79607812075FE4200A5DF96 /* EthereumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79607802075FE4200A5DF96 /* EthereumTests.swift */; };
@@ -24,6 +23,8 @@
 		C796078A2076147C00A5DF96 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79607892076147C00A5DF96 /* ArrayTests.swift */; };
 		C7C2DCC520734DA60014DAE4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C2DCC420734DA60014DAE4 /* String.swift */; };
 		C7CE24FB20782C9A0075BDF7 /* ConvenienceMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE24FA20782C9A0075BDF7 /* ConvenienceMethods.swift */; };
+		C7CE24FF2081BC780075BDF7 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE24FE2081BC780075BDF7 /* Enum.swift */; };
+		C7CE25022082D5E10075BDF7 /* JSONRPCHexCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796077A207553AD00A5DF96 /* JSONRPCHexCodable.swift */; };
 		C7F6E90B204742A100BFAEAC /* libJSONRPCCodable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F6E8F62047400C00BFAEAC /* libJSONRPCCodable.a */; };
 		C7F6E91B2047430A00BFAEAC /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F6E908204742A100BFAEAC /* Tests.swift */; };
 /* End PBXBuildFile section */
@@ -69,6 +70,8 @@
 		C79607892076147C00A5DF96 /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
 		C7C2DCC420734DA60014DAE4 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = String.swift; path = ../Source/String.swift; sourceTree = "<group>"; };
 		C7CE24FA20782C9A0075BDF7 /* ConvenienceMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvenienceMethods.swift; sourceTree = "<group>"; };
+		C7CE24FE2081BC780075BDF7 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Enum.swift; path = ../Source/Enum.swift; sourceTree = "<group>"; };
+		C7CE25002081CE5E0075BDF7 /* JSONRPCEnumCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRPCEnumCodable.swift; sourceTree = "<group>"; };
 		C7F6E8F62047400C00BFAEAC /* libJSONRPCCodable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJSONRPCCodable.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F6E906204742A100BFAEAC /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F6E908204742A100BFAEAC /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 			children = (
 				C72472642047442B0023DF67 /* JSONRPCCodable.swift */,
 				C796077A207553AD00A5DF96 /* JSONRPCHexCodable.swift */,
+				C7CE25002081CE5E0075BDF7 /* JSONRPCEnumCodable.swift */,
 				C72472662047442B0023DF67 /* JSONRPCCodableExtension.swift */,
 				C704BAD22065C12F0085EA61 /* JSONRCPRequest.swift */,
 				C72472632047442B0023DF67 /* JSONRPCRequestDecoder.swift */,
@@ -112,6 +116,7 @@
 				C7C2DCC420734DA60014DAE4 /* String.swift */,
 				C79607852076137500A5DF96 /* Data.swift */,
 				C79607862076137500A5DF96 /* Int.swift */,
+				C7CE24FE2081BC780075BDF7 /* Enum.swift */,
 				C7F6E907204742A100BFAEAC /* Tests */,
 				C7F6E8F72047400C00BFAEAC /* Products */,
 				C7F6E912204742E600BFAEAC /* JSONRPCCodable-Bridging-Header.h */,
@@ -236,11 +241,12 @@
 				C72472692047442B0023DF67 /* JSONRPCRequestEncoder.swift in Sources */,
 				C72472682047442B0023DF67 /* JSONRPCCodable.swift in Sources */,
 				C704BAD8206F3DA10085EA61 /* JSONRPCArrayDecoder.swift in Sources */,
-				C796077B207553AD00A5DF96 /* JSONRPCHexCodable.swift in Sources */,
+				C7CE24FF2081BC780075BDF7 /* Enum.swift in Sources */,
 				C79607872076137500A5DF96 /* Data.swift in Sources */,
 				C796077D20757A9100A5DF96 /* JSONRPCError.swift in Sources */,
 				C749AA6E2058FC1100377975 /* JSONRPCResultEncoder.swift in Sources */,
 				C704BAD32065C12F0085EA61 /* JSONRPCArrayEncoder.swift in Sources */,
+				C7CE25022082D5E10075BDF7 /* JSONRPCHexCodable.swift in Sources */,
 				C724726E2047E4CD0023DF67 /* JSONRPCResultDecoder.swift in Sources */,
 				C79607882076137500A5DF96 /* Int.swift in Sources */,
 				C724726A2047442B0023DF67 /* JSONRPCCodableExtension.swift in Sources */,

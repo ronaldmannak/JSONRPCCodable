@@ -160,7 +160,7 @@ public extension JSONRPCArrayDecoder {
             }
             throw Error.typeNotConformingToJSONRPCCodable(type)
         default:
-            throw Error.typeNotConformingToJSONRPCCodable(type)
+            return try T(from: self)
         }
     }
     
@@ -171,6 +171,10 @@ public extension JSONRPCArrayDecoder {
         let item: Any = array[counter]
         counter = counter + 1
         return item
+    }
+    
+    public func readCurrent() -> Any {        
+        return array[counter - 1]
     }
 }
 

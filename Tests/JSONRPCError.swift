@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum JSONRPCError: Error {
+public enum JSONRPCError: Error {
     
     
     
@@ -27,5 +27,8 @@ enum JSONRPCError: Error {
     /// require `BinaryDecodable` because `BinaryDecoder` doesn't support full keyed
     /// coding functionality.)
     case typeNotConformingToJSONRPCCodable(Decodable.Type)
+    
+    // Enum
+    case unknownType(Any)
     
 }
