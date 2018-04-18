@@ -13,7 +13,7 @@ import Foundation
  */
 public final class JSONRPCRequestDecoder {
     
-    public func decode<T>(_ type: T.Type, from: Data) throws -> JSONRPCRequest<T> where T: JSONRPCCodable {
+    public func decode<T>(_ type: T.Type, from: Data) throws -> JSONRPCRequest<T> where T: JSONRPCRequestCodable {
         let decoder = JSONDecoder()
         return try decoder.decode(JSONRPCRequest<T>.self, from: from)
     }

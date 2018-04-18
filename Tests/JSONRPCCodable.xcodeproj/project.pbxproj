@@ -10,21 +10,26 @@
 		C704BAD32065C12F0085EA61 /* JSONRPCArrayEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BAD12065C12F0085EA61 /* JSONRPCArrayEncoder.swift */; };
 		C704BAD42065C12F0085EA61 /* JSONRCPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BAD22065C12F0085EA61 /* JSONRCPRequest.swift */; };
 		C704BAD8206F3DA10085EA61 /* JSONRPCArrayDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704BAD52065C14C0085EA61 /* JSONRPCArrayDecoder.swift */; };
-		C72472682047442B0023DF67 /* JSONRPCCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72472642047442B0023DF67 /* JSONRPCCodable.swift */; };
 		C72472692047442B0023DF67 /* JSONRPCRequestEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72472652047442B0023DF67 /* JSONRPCRequestEncoder.swift */; };
 		C724726A2047442B0023DF67 /* JSONRPCCodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72472662047442B0023DF67 /* JSONRPCCodableExtension.swift */; };
-		C724726E2047E4CD0023DF67 /* JSONRPCResultDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C724726C2047E4CD0023DF67 /* JSONRPCResultDecoder.swift */; };
-		C749AA6E2058FC1100377975 /* JSONRPCResultEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C724726B2047E4CD0023DF67 /* JSONRPCResultEncoder.swift */; };
-		C796077D20757A9100A5DF96 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796077C20757A9100A5DF96 /* JSONRPCError.swift */; };
+		C724726E2047E4CD0023DF67 /* JSONRPCResponseDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C724726C2047E4CD0023DF67 /* JSONRPCResponseDecoder.swift */; };
+		C749AA6E2058FC1100377975 /* JSONRPCResponseEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C724726B2047E4CD0023DF67 /* JSONRPCResponseEncoder.swift */; };
 		C796077F207592D500A5DF96 /* TypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796077E207592D500A5DF96 /* TypeTests.swift */; };
 		C79607812075FE4200A5DF96 /* EthereumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79607802075FE4200A5DF96 /* EthereumTests.swift */; };
 		C79607872076137500A5DF96 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79607852076137500A5DF96 /* Data.swift */; };
 		C79607882076137500A5DF96 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79607862076137500A5DF96 /* Int.swift */; };
 		C796078A2076147C00A5DF96 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79607892076147C00A5DF96 /* ArrayTests.swift */; };
 		C7C2DCC520734DA60014DAE4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C2DCC420734DA60014DAE4 /* String.swift */; };
-		C7CE24FB20782C9A0075BDF7 /* ConvenienceMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE24FA20782C9A0075BDF7 /* ConvenienceMethods.swift */; };
-		C7CE24FF2081BC780075BDF7 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE24FE2081BC780075BDF7 /* Enum.swift */; };
+		C7CE24FB20782C9A0075BDF7 /* RequestConvenienceMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE24FA20782C9A0075BDF7 /* RequestConvenienceMethods.swift */; };
 		C7CE25022082D5E10075BDF7 /* JSONRPCHexCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796077A207553AD00A5DF96 /* JSONRPCHexCodable.swift */; };
+		C7CE2506208324910075BDF7 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE2505208324910075BDF7 /* BigInt.swift */; };
+		C7CE250820846C080075BDF7 /* EthereumResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE250720846C080075BDF7 /* EthereumResultTest.swift */; };
+		C7CE250A208470490075BDF7 /* JSONRPCResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE2509208470490075BDF7 /* JSONRPCResponse.swift */; };
+		C7CE25102085B75D0075BDF7 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE250F2085B75D0075BDF7 /* JSONRPCError.swift */; };
+		C7CE25122085B7690075BDF7 /* JSONRPCID.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE25112085B7690075BDF7 /* JSONRPCID.swift */; };
+		C7CE25142085B7B90075BDF7 /* JSONRPCCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE25132085B7B90075BDF7 /* JSONRPCCodable.swift */; };
+		C7CE25162085C0F70075BDF7 /* ResultConvenienceMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE25152085C0F70075BDF7 /* ResultConvenienceMethods.swift */; };
+		C7CE25192086ED010075BDF7 /* JSONRPCRequestDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72472632047442B0023DF67 /* JSONRPCRequestDecoder.swift */; };
 		C7F6E90B204742A100BFAEAC /* libJSONRPCCodable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F6E8F62047400C00BFAEAC /* libJSONRPCCodable.a */; };
 		C7F6E91B2047430A00BFAEAC /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F6E908204742A100BFAEAC /* Tests.swift */; };
 /* End PBXBuildFile section */
@@ -56,22 +61,25 @@
 		C704BAD22065C12F0085EA61 /* JSONRCPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRCPRequest.swift; path = ../Source/JSONRCPRequest.swift; sourceTree = "<group>"; };
 		C704BAD52065C14C0085EA61 /* JSONRPCArrayDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSONRPCArrayDecoder.swift; path = ../Source/JSONRPCArrayDecoder.swift; sourceTree = "<group>"; };
 		C72472632047442B0023DF67 /* JSONRPCRequestDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCRequestDecoder.swift; path = ../Source/JSONRPCRequestDecoder.swift; sourceTree = "<group>"; };
-		C72472642047442B0023DF67 /* JSONRPCCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCCodable.swift; path = ../Source/JSONRPCCodable.swift; sourceTree = "<group>"; };
 		C72472652047442B0023DF67 /* JSONRPCRequestEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCRequestEncoder.swift; path = ../Source/JSONRPCRequestEncoder.swift; sourceTree = "<group>"; };
 		C72472662047442B0023DF67 /* JSONRPCCodableExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCCodableExtension.swift; path = ../Source/JSONRPCCodableExtension.swift; sourceTree = "<group>"; };
-		C724726B2047E4CD0023DF67 /* JSONRPCResultEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCResultEncoder.swift; path = ../Source/JSONRPCResultEncoder.swift; sourceTree = "<group>"; };
-		C724726C2047E4CD0023DF67 /* JSONRPCResultDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCResultDecoder.swift; path = ../Source/JSONRPCResultDecoder.swift; sourceTree = "<group>"; };
+		C724726B2047E4CD0023DF67 /* JSONRPCResponseEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCResponseEncoder.swift; path = ../Source/JSONRPCResponseEncoder.swift; sourceTree = "<group>"; };
+		C724726C2047E4CD0023DF67 /* JSONRPCResponseDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCResponseDecoder.swift; path = ../Source/JSONRPCResponseDecoder.swift; sourceTree = "<group>"; };
 		C796077A207553AD00A5DF96 /* JSONRPCHexCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSONRPCHexCodable.swift; path = ../Source/JSONRPCHexCodable.swift; sourceTree = "<group>"; };
-		C796077C20757A9100A5DF96 /* JSONRPCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
 		C796077E207592D500A5DF96 /* TypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeTests.swift; sourceTree = "<group>"; };
 		C79607802075FE4200A5DF96 /* EthereumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumTests.swift; sourceTree = "<group>"; };
 		C79607852076137500A5DF96 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Data.swift; path = ../Source/Data.swift; sourceTree = "<group>"; };
 		C79607862076137500A5DF96 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Int.swift; path = ../Source/Int.swift; sourceTree = "<group>"; };
 		C79607892076147C00A5DF96 /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
 		C7C2DCC420734DA60014DAE4 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = String.swift; path = ../Source/String.swift; sourceTree = "<group>"; };
-		C7CE24FA20782C9A0075BDF7 /* ConvenienceMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvenienceMethods.swift; sourceTree = "<group>"; };
-		C7CE24FE2081BC780075BDF7 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Enum.swift; path = ../Source/Enum.swift; sourceTree = "<group>"; };
-		C7CE25002081CE5E0075BDF7 /* JSONRPCEnumCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRPCEnumCodable.swift; sourceTree = "<group>"; };
+		C7CE24FA20782C9A0075BDF7 /* RequestConvenienceMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConvenienceMethods.swift; sourceTree = "<group>"; };
+		C7CE2505208324910075BDF7 /* BigInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BigInt.swift; path = ../Source/BigInt.swift; sourceTree = "<group>"; };
+		C7CE250720846C080075BDF7 /* EthereumResultTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumResultTest.swift; sourceTree = "<group>"; };
+		C7CE2509208470490075BDF7 /* JSONRPCResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSONRPCResponse.swift; path = ../Source/JSONRPCResponse.swift; sourceTree = "<group>"; };
+		C7CE250F2085B75D0075BDF7 /* JSONRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCError.swift; path = ../Source/JSONRPCError.swift; sourceTree = "<group>"; };
+		C7CE25112085B7690075BDF7 /* JSONRPCID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCID.swift; path = ../Source/JSONRPCID.swift; sourceTree = "<group>"; };
+		C7CE25132085B7B90075BDF7 /* JSONRPCCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCCodable.swift; path = ../Source/JSONRPCCodable.swift; sourceTree = "<group>"; };
+		C7CE25152085C0F70075BDF7 /* ResultConvenienceMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultConvenienceMethods.swift; sourceTree = "<group>"; };
 		C7F6E8F62047400C00BFAEAC /* libJSONRPCCodable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJSONRPCCodable.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F6E906204742A100BFAEAC /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F6E908204742A100BFAEAC /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -101,22 +109,23 @@
 		C7F6E8ED2047400C00BFAEAC = {
 			isa = PBXGroup;
 			children = (
-				C72472642047442B0023DF67 /* JSONRPCCodable.swift */,
+				C7CE25132085B7B90075BDF7 /* JSONRPCCodable.swift */,
 				C796077A207553AD00A5DF96 /* JSONRPCHexCodable.swift */,
-				C7CE25002081CE5E0075BDF7 /* JSONRPCEnumCodable.swift */,
 				C72472662047442B0023DF67 /* JSONRPCCodableExtension.swift */,
 				C704BAD22065C12F0085EA61 /* JSONRCPRequest.swift */,
 				C72472632047442B0023DF67 /* JSONRPCRequestDecoder.swift */,
 				C72472652047442B0023DF67 /* JSONRPCRequestEncoder.swift */,
-				C724726C2047E4CD0023DF67 /* JSONRPCResultDecoder.swift */,
-				C724726B2047E4CD0023DF67 /* JSONRPCResultEncoder.swift */,
+				C7CE2509208470490075BDF7 /* JSONRPCResponse.swift */,
+				C724726C2047E4CD0023DF67 /* JSONRPCResponseDecoder.swift */,
+				C724726B2047E4CD0023DF67 /* JSONRPCResponseEncoder.swift */,
 				C704BAD52065C14C0085EA61 /* JSONRPCArrayDecoder.swift */,
 				C704BAD12065C12F0085EA61 /* JSONRPCArrayEncoder.swift */,
-				C796077C20757A9100A5DF96 /* JSONRPCError.swift */,
+				C7CE250F2085B75D0075BDF7 /* JSONRPCError.swift */,
 				C7C2DCC420734DA60014DAE4 /* String.swift */,
 				C79607852076137500A5DF96 /* Data.swift */,
 				C79607862076137500A5DF96 /* Int.swift */,
-				C7CE24FE2081BC780075BDF7 /* Enum.swift */,
+				C7CE2505208324910075BDF7 /* BigInt.swift */,
+				C7CE25112085B7690075BDF7 /* JSONRPCID.swift */,
 				C7F6E907204742A100BFAEAC /* Tests */,
 				C7F6E8F72047400C00BFAEAC /* Products */,
 				C7F6E912204742E600BFAEAC /* JSONRPCCodable-Bridging-Header.h */,
@@ -138,8 +147,10 @@
 				C7F6E908204742A100BFAEAC /* Tests.swift */,
 				C796077E207592D500A5DF96 /* TypeTests.swift */,
 				C79607802075FE4200A5DF96 /* EthereumTests.swift */,
+				C7CE250720846C080075BDF7 /* EthereumResultTest.swift */,
 				C79607892076147C00A5DF96 /* ArrayTests.swift */,
-				C7CE24FA20782C9A0075BDF7 /* ConvenienceMethods.swift */,
+				C7CE24FA20782C9A0075BDF7 /* RequestConvenienceMethods.swift */,
+				C7CE25152085C0F70075BDF7 /* ResultConvenienceMethods.swift */,
 				C7F6E90A204742A100BFAEAC /* Info.plist */,
 			);
 			path = Tests;
@@ -239,15 +250,18 @@
 			files = (
 				C7C2DCC520734DA60014DAE4 /* String.swift in Sources */,
 				C72472692047442B0023DF67 /* JSONRPCRequestEncoder.swift in Sources */,
-				C72472682047442B0023DF67 /* JSONRPCCodable.swift in Sources */,
+				C7CE2506208324910075BDF7 /* BigInt.swift in Sources */,
 				C704BAD8206F3DA10085EA61 /* JSONRPCArrayDecoder.swift in Sources */,
-				C7CE24FF2081BC780075BDF7 /* Enum.swift in Sources */,
 				C79607872076137500A5DF96 /* Data.swift in Sources */,
-				C796077D20757A9100A5DF96 /* JSONRPCError.swift in Sources */,
-				C749AA6E2058FC1100377975 /* JSONRPCResultEncoder.swift in Sources */,
+				C7CE250A208470490075BDF7 /* JSONRPCResponse.swift in Sources */,
+				C7CE25192086ED010075BDF7 /* JSONRPCRequestDecoder.swift in Sources */,
+				C749AA6E2058FC1100377975 /* JSONRPCResponseEncoder.swift in Sources */,
+				C7CE25122085B7690075BDF7 /* JSONRPCID.swift in Sources */,
 				C704BAD32065C12F0085EA61 /* JSONRPCArrayEncoder.swift in Sources */,
+				C7CE25102085B75D0075BDF7 /* JSONRPCError.swift in Sources */,
 				C7CE25022082D5E10075BDF7 /* JSONRPCHexCodable.swift in Sources */,
-				C724726E2047E4CD0023DF67 /* JSONRPCResultDecoder.swift in Sources */,
+				C724726E2047E4CD0023DF67 /* JSONRPCResponseDecoder.swift in Sources */,
+				C7CE25142085B7B90075BDF7 /* JSONRPCCodable.swift in Sources */,
 				C79607882076137500A5DF96 /* Int.swift in Sources */,
 				C724726A2047442B0023DF67 /* JSONRPCCodableExtension.swift in Sources */,
 				C704BAD42065C12F0085EA61 /* JSONRCPRequest.swift in Sources */,
@@ -258,9 +272,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7CE24FB20782C9A0075BDF7 /* ConvenienceMethods.swift in Sources */,
+				C7CE24FB20782C9A0075BDF7 /* RequestConvenienceMethods.swift in Sources */,
+				C7CE250820846C080075BDF7 /* EthereumResultTest.swift in Sources */,
 				C79607812075FE4200A5DF96 /* EthereumTests.swift in Sources */,
 				C796078A2076147C00A5DF96 /* ArrayTests.swift in Sources */,
+				C7CE25162085C0F70075BDF7 /* ResultConvenienceMethods.swift in Sources */,
 				C7F6E91B2047430A00BFAEAC /* Tests.swift in Sources */,
 				C796077F207592D500A5DF96 /* TypeTests.swift in Sources */,
 			);

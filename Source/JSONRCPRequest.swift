@@ -11,9 +11,9 @@ import Foundation
 /**
 
  */
-public struct JSONRPCRequest<P: JSONRPCCodable>: Codable, Equatable {
+public struct JSONRPCRequest<P: JSONRPCRequestCodable>: Codable, Equatable {
     public let jsonrpc: String
-    public var id: Int64
+    public let id: Int
     public let params: P?
     
     enum CodingKeys : String, CodingKey {
@@ -27,7 +27,7 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable, Equatable {
         
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(jsonrpc, forKey: .jsonrpc)
-        try container.encode(P.method(), forKey: .method)
+        
         try container.encode(id, forKey: .id)
         if let params = params {
             switch P.paramEncoding() {
@@ -48,10 +48,10 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable, Equatable {
     
     /**
      */
-    public init(params: P, id: Int64? = nil, jsonrpc: String = rpcVersion) {
+    public init(params: P, id: Int? = nil, jsonrpc: String = rpcVersion) {
         self.jsonrpc = jsonrpc
         self.params = params
-        self.id = id ?? 1 // TODO: Create threadsafe sequential numbers.
+        self.id = id ?? JSONRPCID.incrementAndGet()
     }
     
     /**
@@ -60,36 +60,23 @@ public struct JSONRPCRequest<P: JSONRPCCodable>: Codable, Equatable {
      */
     public init(from decoder: Decoder) throws {        
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let id = try container.decode(Int64.self, forKey: .id)
+        let id = try container.decode(Int.self, forKey: .id)
         let jsonrpc = try container.decode(String.self, forKey: .jsonrpc)
-        let params: P
+        let result: P
         
         switch P.paramEncoding() {
         case .byName:
-            if P.wrapParamsInArray() == true {
-                // Parameter dictionary is wrapped in an array
-                guard let paramElement = try container.decode([P].self, forKey: .params).first else {
-                    throw JSONRPCError.noParametersFound
-                }
-                params = paramElement
-            } else {
-                // Parameters are not wrapped in an array
-                params = try container.decode(P.self, forKey: .params)
-            }
+            result = try container.decode(P.self, forKey: .params)
         case .byPosition:
-                        
-            //  array out of container
             let array = try container.decode([String].self, forKey: .params)
             if array.isEmpty {
-                params = try P(from: decoder)
+                result = try P(from: decoder)
             } else {
-                print(array)
                 let decoder = JSONRPCArrayDecoder(array: array)
-                params = try P(from: decoder)
-                print(params)
+                result = try P(from: decoder)
             }
         }
-        self.init(params: params, id: id, jsonrpc: jsonrpc)
+        self.init(params: result, id: id, jsonrpc: jsonrpc)
     }
 }
 

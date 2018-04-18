@@ -26,7 +26,7 @@ class EthereumTests: XCTestCase {
     // {"jsonrpc":"2.0","method":"eth_getTransactionByBlockNumberAndIndex","params":["0x29c", "0x0"],"id":1}
     func testGetTransactionByBlock() {
 
-        struct TransactionByBlock: JSONRPCCodable, JSONRPCHexCodable {
+        struct TransactionByBlock: JSONRPCRequestCodable, JSONRPCHexCodable {
             
             enum DefaultBlock: Codable, Equatable {
                 
@@ -98,7 +98,7 @@ class EthereumTests: XCTestCase {
     func testGetUncleByBlockHash() {
         
         
-        struct UncleByBlockHash: JSONRPCCodable, JSONRPCHexCodable {            
+        struct UncleByBlockHash: JSONRPCRequestCodable, JSONRPCHexCodable {            
             let blockHash: String
             let unclePosition: Int
             
@@ -122,7 +122,7 @@ class EthereumTests: XCTestCase {
     // Expected result: {"jsonrpc":"2.0","method":"eth_uninstallFilter","params":["0xb"],"id":73}
     
     func testEthUninstallFilter() {
-        struct UninstallFilter: JSONRPCCodable, JSONRPCHexCodable, Equatable {
+        struct UninstallFilter: JSONRPCRequestCodable, JSONRPCHexCodable, Equatable {
             let filterId: Int
             static func method() -> String { return "eth_uninstallFilter" }
             static var hexKeys: [String] { return ["filterId"] }

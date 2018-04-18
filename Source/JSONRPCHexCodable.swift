@@ -9,8 +9,7 @@
 import Foundation
 
 /**
- For data types that have properties that need to be hex encoded.
- 
+ For data types that have properties that need to be hex encoded. 
  */
 public protocol JSONRPCHexCodable {
     static var hexKeys: [String] { get }

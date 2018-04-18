@@ -9,7 +9,7 @@
 import XCTest
 import JSONRPCCodable
 
-func assertRoundtrip<T: JSONRPCCodable>(_ original: T) throws {
+func assertRoundtrip<T: JSONRPCRequestCodable>(_ original: T) throws {
     // Encode
     let request = try encode(original)
     let data: JSONRPCRequest<T> = try decode(request)
@@ -17,17 +17,17 @@ func assertRoundtrip<T: JSONRPCCodable>(_ original: T) throws {
     XCTAssert(original == decoded)
 }
 
-func encode<T: JSONRPCCodable>(_ original: T) throws -> Data {
+func encode<T: JSONRPCRequestCodable>(_ original: T) throws -> Data {
 //    let request = JSONRPCRequest<T>(params: original)
     return try JSONRPCRequestEncoder.encode(original)
 }
 
-func decode<T: JSONRPCCodable>(_ data: Data) throws -> JSONRPCRequest<T> {
+func decode<T: JSONRPCRequestCodable>(_ data: Data) throws -> JSONRPCRequest<T> {
     let decoder = JSONDecoder()
     return try decoder.decode(JSONRPCRequest<T>.self, from: data)
 }
 
-func extract<T: JSONRPCCodable>(_ request: JSONRPCRequest<T>) throws -> T {
+func extract<T: JSONRPCRequestCodable>(_ request: JSONRPCRequest<T>) throws -> T {
     guard let params = request.params else {
         throw UTError.emptyParams
     }
@@ -54,7 +54,7 @@ func param<A>(dict: [String: Any], index: Int) throws -> A {
     return value
 }
 
-func params<T: JSONRPCCodable>(codable: T) throws -> [Any] {
+func params<T: JSONRPCRequestCodable>(codable: T) throws -> [Any] {
     let data = try encode(codable)
     let dict = try extractDictionary(data)
     guard let params = dict["params"] as? [Any] else {
@@ -65,6 +65,7 @@ func params<T: JSONRPCCodable>(codable: T) throws -> [Any] {
 
 enum UTError: Error {
     case emptyParams
+    case emptyResult
     case notAValidDictionary
     case paramNotFound
     case indexOutOfRange

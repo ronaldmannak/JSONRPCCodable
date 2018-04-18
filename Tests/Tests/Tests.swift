@@ -22,7 +22,7 @@ class RequestCodableTests: XCTestCase {
     }
     
     func testEmptyParamsByPosition() {
-        struct Ethversion: JSONRPCCodable {
+        struct Ethversion: JSONRPCRequestCodable {
             static func method() -> String { return "eth_version" }
         }
 
@@ -35,9 +35,9 @@ class RequestCodableTests: XCTestCase {
     }
     
     func testEmptyParamsByName() {
-        struct Ethversion: JSONRPCCodable {
+        struct Ethversion: JSONRPCRequestCodable {
             static func method() -> String { return "eth_version" }
-            static func paramEncoding() -> JSONRPCParamStructure { return .byName }
+            static func paramEncoding() -> JSONRPCStructure { return .byName }
         }
 
         do {
@@ -49,12 +49,12 @@ class RequestCodableTests: XCTestCase {
     }
 
     func testParameterByName() {
-        struct ParamByName: JSONRPCCodable {
+        struct ParamByName: JSONRPCRequestCodable {
             let param1: String
             let param2: Int
 
             static func method() -> String { return "ParamByName" }
-            static func paramEncoding() -> JSONRPCParamStructure { return .byName }
+            static func paramEncoding() -> JSONRPCStructure { return .byName }
             static func wrapParamsInArray() -> Bool { return true }
         }
         do {
@@ -66,12 +66,12 @@ class RequestCodableTests: XCTestCase {
     }
     
     func testParameterByPosition() {
-        struct ParamByName: JSONRPCCodable {
+        struct ParamByName: JSONRPCRequestCodable {
             let param1: String
             let param2: Int64
 
             static func method() -> String { return "ParamByName" }
-            static func paramEncoding() -> JSONRPCParamStructure { return .byPosition }
+            static func paramEncoding() -> JSONRPCStructure { return .byPosition }
         }
         do {
             let p = ParamByName(param1: "FirstParameter", param2: 31)
@@ -82,12 +82,12 @@ class RequestCodableTests: XCTestCase {
     }
     
     func testDecode() {
-        struct ParamByName: JSONRPCCodable {
+        struct ParamByName: JSONRPCRequestCodable {
             let param1: String
             let param2: Int
             
             static func method() -> String { return "ParamByName" }
-            static func paramEncoding() -> JSONRPCParamStructure { return .byName }
+            static func paramEncoding() -> JSONRPCStructure { return .byName }
         }
         do {
             let p = ParamByName(param1: "FirstParameter", param2: 31)
