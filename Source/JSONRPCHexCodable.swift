@@ -24,15 +24,13 @@ public extension JSONRPCHexCodable {
     // We also might want to throw if hexKeys contains a key that is not in children
     func hexEncodedOrder() -> ([Int], [String]) {
         let mirror = Mirror(reflecting: self)
-        var i = 0
         var hexIndices = [Int]()
         var hexLabels = [String]()
-        for child in mirror.children {
+        for (i, child) in mirror.children.enumerated() {
             if let label = child.label, type(of: self).hexKeys.contains(label) == true {
                 hexIndices.append(i)
                 hexLabels.append(label)
             }
-            i = i + 1
         }
         return (hexIndices, hexLabels)
     }
